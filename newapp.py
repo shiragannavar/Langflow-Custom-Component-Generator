@@ -98,7 +98,7 @@ def main():
     tab_form, tab_code = st.tabs(["Component Generator", "Generated Code"])
 
     with tab_form:
-        st.sidebar.image(LOGO_URL, use_column_width=True)
+        st.sidebar.image(LOGO_URL, use_container_width=True)
         st.title("Custom Langflow Component Generator")
 
         # Footer
