@@ -1,12 +1,8 @@
 import streamlit as st
 import openai
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 # Replace with your own or secure way of storing the API key
-openai.api_key = os.environ["OPENAI_API"]
+openai.api_key = st.secrets["OPENAI_API"]
 # Replace with your actual logo image URL or file path
 LOGO_URL = "https://cdn.sanity.io/images/bbnkhnhl/production/1f317b00397c3c318af21aa8978d53aacf8b69c8-3449x322.svg"
 
@@ -179,9 +175,9 @@ def main():
                 st.warning("Please fix the errors above and resubmit.")
                 st.stop()
 
-            with st.spinner("Generating code snippet via OpenAI..."):
+            with st.spinner("Generating custom component code"):
                 final_code = ask_gpt_for_code(user_data)
-                final_code = "``````python\n" + final_code + "\n``````"
+                # final_code = "``````python\n" + final_code + "\n``````"
 
             # Store the final code in session_state so it can be viewed in the other tab
             st.session_state["final_code"] = final_code
@@ -192,8 +188,8 @@ def main():
     with tab_code:
         # If code has been generated, display it. Otherwise, show info.
         final_code = st.session_state.get("final_code", None)
-        final_code = final_code.lstrip("```python")
-        final_code = final_code.rstrip("```")
+        # final_code = final_code.lstrip("```python")
+        # final_code = final_code.rstrip("```")
         if final_code:
             # We use st.code(...) for syntax highlighting or st.write(...) if you prefer raw.
             st.write(final_code)
